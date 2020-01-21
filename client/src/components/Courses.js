@@ -1,14 +1,23 @@
 //- Courses - This component provides the "Courses" screen by retrieving the list of courses from the REST API's /api/courses route and rendering a list of courses. Each course needs to link to its respective "Course Detail" screen. This component also renders a link to the "Create Course" screen.
 import React, { Component } from 'react';
-
 import { Link } from 'react-router-dom';
 
 class Courses extends Component {
-   state = {
+   constructor(){
+      super();
+      this.state = {
        courses: []
-   };
+   }
+}
    
    componentDidMount() {
+      // fetch('http://localhost:5000/api/courses')
+      // .then(res => res.json())
+      // .then(json => {
+      //    this.setState({
+      //       courses: json
+      //    })
+      // })
       const { context } = this.props;
        //retrieves all course data from the API
        context.actions.getCourses()
@@ -24,6 +33,8 @@ class Courses extends Component {
    };
    
    render () {
+      // console.log(this.state.courses)
+
        const courseList = this.state.courses.map(course =>
            <div key={course.id} className="grid-33">
                <Link to={`/courses/${course.id}`} className="course--module course--link">
@@ -34,7 +45,6 @@ class Courses extends Component {
        )
 
        return (
-        
            <div className="bounds">
                {courseList}
                <div className="grid-33">

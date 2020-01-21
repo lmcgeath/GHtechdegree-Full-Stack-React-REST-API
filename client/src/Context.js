@@ -23,13 +23,6 @@ export class Provider extends Component {
       authenticatedUser: this.state.authenticatedUser,
       userPassword: this.state.userPassword,
       actions: {
-         signIn: this.signIn,
-         signOut: this.signOut,
-         signUp: this.signUp,
-         createCourse: this.createCourse,
-         updateCourse: this.updateCourse,
-         getCourse: this.getCourse,
-         deleteCourse: this.deleteCourse,
          getCourses: this.getCourses
    }
 };

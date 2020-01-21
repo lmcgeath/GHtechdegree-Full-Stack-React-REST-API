@@ -14,7 +14,7 @@ export default class Data {
     if (body !== null) {
       options.body = JSON.stringify(body);
     }
-      // Check if auth is required
+   // Check if authorization is required
   if (requiresAuth) {    
    const encodedCredentials = btoa(`${credentials.emailAddress}:${credentials.password}`);
    options.headers['Authorization'] = `Basic ${encodedCredentials}`;
@@ -23,38 +23,9 @@ export default class Data {
     return fetch(url, options);
   }
 
-  async getUser(emailAddress, password) {
-    const response = await this.api(`/users`, 'GET', null, true, { emailAddress, password });
-    if (response.status === 200) {
-      return response.json().then(data => data);
-    }
-    else if (response.status === 401) {
-      return null;
-    }
-    else {
-      throw new Error();
-    }
-  }
-  
-  async createUser(user) {
-    const response = await this.api('/users', 'POST', user);
-    if (response.status === 201) {
-      return [];
-    }
-    else if (response.status === 400) {
-      return response.json().then(data => {
-        return data.errors;
-      });
-    }
-    else {
-      throw new Error();
-    }
-  }
-
-
-//method used to retrieve all course data
-getCourses = async () => {
-   const response = await this.api(`/courses`, 'GET', null);
+//uses the api method to fetch all courses
+async getCourses(){
+   const response = await this.api('/courses', 'GET', null);
    if (response.status === 200) {
        //returns all course data if successful
        return response.json()
