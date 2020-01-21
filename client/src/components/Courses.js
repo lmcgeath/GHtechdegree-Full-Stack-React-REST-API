@@ -9,17 +9,18 @@ class Courses extends Component {
    };
    
    componentDidMount() {
-      // const { context } = this.props;
+      const { context } = this.props;
        //retrieves all course data from the API
-       this.props.context.actions.getCourses()
-           .then(responseData => {
-               //sets courses state if successful
-               this.setState({ courses: responseData });
+       context.actions.getCourses()
+         .then(responseData => {
+            //sets courses state if successful
+            this.setState({ courses: responseData });
+            console.log(this.state.courses)
            })
-           .catch(error => {
-               console.log(error);
-               this.props.history.push('/error');
-           });
+         .catch(error => {
+            console.log(error);
+            this.props.history.push('/error');
+         });
    };
    
    render () {

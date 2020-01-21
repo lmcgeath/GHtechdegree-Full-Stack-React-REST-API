@@ -5,32 +5,29 @@ import {
    Redirect,
    Switch
  } from 'react-router-dom';
-import './App.css';
+
 import withContext from './Context';
 import Courses from './components/Courses';
 import Header from './components/Header';
 
-const HeaderWithContext = withContext(Header);
 const CoursesWithContext = withContext(Courses);
+const HeaderWithContext = withContext(Header);
 
 
-export default () => (
+const App = () => (
    <Router>
-     <div>
-      {/* <HeaderWithContext /> */}
-
-       <Switch>
-         <Route exact path="/courses" component={CoursesWithContext} />}
-         {/* <PrivateRoute path="/authenticated" component={AuthWithContext} /> */}
-         {/* <Route path="/signin" component={UserSignInWithContext} /> */}
-         {/* <Route path="/signup" component={UserSignUpWithContext} /> */}
-         {/* <Route path="/signout" component={UserSignOutWithContext} /> */}
-         {/* <Route component={NotFound} /> */}
+      <div>
+        <HeaderWithContext />
+      <Switch>
+         <Route exact path='/' component={CoursesWithContext}/>
+         <Route exact path='/courses' component={CoursesWithContext} />
+         
       </Switch>
-
-    </div>
+      </div>
    </Router>
-  );
+);
+
+export default App;
 
 
 
