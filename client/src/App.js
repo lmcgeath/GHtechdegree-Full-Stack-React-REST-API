@@ -9,9 +9,12 @@ import {
 import withContext from './Context';
 import Courses from './components/Courses';
 import Header from './components/Header';
+import CourseDetail from './components/CourseDetail';
 
 const CoursesWithContext = withContext(Courses);
 const HeaderWithContext = withContext(Header);
+const CourseDetailWithContext = withContext(CourseDetail);
+
 
 
 const App = () => (
@@ -21,6 +24,7 @@ const App = () => (
       <Switch>
          <Route exact path='/' component={CoursesWithContext}/>
          <Route exact path='/courses' component={CoursesWithContext} />
+         <Route exact path='/courses/:id' component={CourseDetailWithContext} />
          
       </Switch>
       </div>

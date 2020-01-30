@@ -11,20 +11,13 @@ class Courses extends Component {
 }
    
    componentDidMount() {
-      // fetch('http://localhost:5000/api/courses')
-      // .then(res => res.json())
-      // .then(json => {
-      //    this.setState({
-      //       courses: json
-      //    })
-      // })
-      const { context } = this.props;
        //retrieves all course data from the API
-       context.actions.getCourses()
+       this.props.context.actions.getCourses()
+
          .then(responseData => {
             //sets courses state if successful
-            this.setState({ courses: responseData });
-            console.log(this.state.courses)
+            this.setState({ courses: responseData.courses });
+            // console.log(this.state.courses)
            })
          .catch(error => {
             console.log(error);
@@ -33,8 +26,6 @@ class Courses extends Component {
    };
    
    render () {
-      // console.log(this.state.courses)
-
        const courseList = this.state.courses.map(course =>
            <div key={course.id} className="grid-33">
                <Link to={`/courses/${course.id}`} className="course--module course--link">
