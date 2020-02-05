@@ -1,3 +1,6 @@
+// // This component provides the "Course Detail" screen by retrieving the detail for a course from the REST API's /api/courses/:id route and rendering the course. The component also renders a "Delete Course" button that when clicked should send a DELETE request to the REST API's /api/courses/:id route in order to delete a course. This component also renders an "Update Course" button for navigating to the "Update Course" screen.
+
+
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 const ReactMarkdown = require('react-markdown');
@@ -19,15 +22,14 @@ class CourseDetail extends Component {
                         course: responseData.course, 
                         courseOwner: responseData.course.User
                     });
-                  //   console.log(this.state.courseOwner)
                 } else {
                     //redirects user if course not found
                     this.props.history.push('/notfound');
                 }
             })
-            .catch(error => {
-                console.log(error);
-                this.props.history.push('/error');
+                  .catch(error => {
+                     console.log(error);
+                     this.props.history.push('/error');
             });
     };
 
@@ -102,7 +104,7 @@ class CourseDetail extends Component {
     }
 }
 
-//conditionally renders the Update Course and Delete Course buttons, only displaying them if the current user is the course owner
+//conditionally renders the Update Course and Delete Course buttons and only displays them if the current user is the course owner
 const ButtonsDisplay = (props) => {
     const {
         authenticatedUser,

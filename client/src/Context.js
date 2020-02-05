@@ -54,6 +54,21 @@ export class Provider extends Component {
         }
     }
 
+    createUser = async (user) => {
+      const response = await this.api('/users', 'POST', user);
+      if (response.status === 201) {
+        return [];
+      }
+      else if (response.status === 400) {
+        return response.json().then(data => {
+          return data.errors;
+        });
+      }
+      else {
+        throw new Error();
+      }
+    }
+
     //method used to call getUser, then sets the user state and cookies if successful
     signIn = async (emailAddress, password) => {
         const user = await this.getUser(emailAddress, password);
@@ -84,6 +99,7 @@ export class Provider extends Component {
     signUp = async (userData) => {
         const response = await this.api('/users', 'POST', userData);
         if (response.status === 201) {
+           this.props.history.push('/');
             //returns empty errors array if user successfully created
             return [];
         } else if (response.status === 400) {
@@ -109,8 +125,10 @@ export class Provider extends Component {
         const password = atob(this.state.userPassword);
         const response = await this.api('/courses', 'POST', courseData, true, {emailAddress, password});
         if (response.status === 201) {
+
             //returns empty errors array if course successfully created
             return [];
+
         } else if (response.status === 400) {
             //returns errors array if validation fails
             return response.json()
@@ -188,7 +206,8 @@ export class Provider extends Component {
                 updateCourse: this.updateCourse,
                 getCourse: this.getCourse,
                 deleteCourse: this.deleteCourse,
-                getCourses: this.getCourses
+                getCourses: this.getCourses,
+               //  createUser: this.createUser
             }
         }
 
