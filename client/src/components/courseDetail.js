@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 const ReactMarkdown = require('react-markdown');
 
-class CourseDetail extends Component {
+export default class CourseDetail extends Component {
     state = {
         course: [],
         courseOwner: []
@@ -21,7 +21,9 @@ class CourseDetail extends Component {
                     this.setState({ 
                         course: responseData.course, 
                         courseOwner: responseData.course.User
+                        
                     });
+
                 } else {
                     //redirects user if course not found
                     this.props.history.push('/notfound');
@@ -31,6 +33,7 @@ class CourseDetail extends Component {
                      console.log(error);
                      this.props.history.push('/error');
             });
+      
     };
 
     deleteCourse = (courseId) => {
@@ -66,9 +69,9 @@ class CourseDetail extends Component {
                     <div className="bounds">
                         <div className="grid-100">
                             <ButtonsDisplay authenticatedUser={this.props.context.authenticatedUser}
-                                            courseOwner={courseOwner}
-                                            courseId={this.props.match.params.id}
-                                            deleteCourse={this.deleteCourse} />
+                                       courseOwner={courseOwner}
+                                       courseId={this.props.match.params.id}
+                                       deleteCourse={this.deleteCourse} />
                             <Link to="/courses" className="button button-secondary">Return to List</Link>
                         </div>
                     </div>
@@ -112,10 +115,8 @@ const ButtonsDisplay = (props) => {
         courseId,
         deleteCourse
     } = props
-
     let buttonsDisplay = null;
-    
-    if (authenticatedUser) {
+   //  if (authenticatedUser) {
         if (authenticatedUser.id === courseOwner.id) {
             buttonsDisplay = (
                 <span>
@@ -123,10 +124,11 @@ const ButtonsDisplay = (props) => {
                     <button onClick={() => {deleteCourse(courseId)}} className="button">Delete Course</button>
                 </span>
             )
-        }
+      //   }
     }
+    console.log(authenticatedUser)//need to get authenticated user to include id... ----NEED TO CHANGE------
 
     return buttonsDisplay;   
 }
  
-export default CourseDetail;
+// export default CourseDetail;

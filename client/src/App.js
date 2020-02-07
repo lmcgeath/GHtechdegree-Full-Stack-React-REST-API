@@ -35,11 +35,12 @@ const App = () => (
       <Switch>
          <Route exact path='/' component={CoursesWithContext}/>
          <Route exact path='/courses' component={CoursesWithContext} />
+         <Route exact path='/courses/create' component={CreateCourseWithContext} />
          <Route exact path='/courses/:id' component={CourseDetailWithContext} />
          <Route exact path='/signin' component={UserSignInWithContext} />
          <Route exact path='/signup' component={UserSignUpWithContext} />
          <Route exact path='/signout' component={UserSignOutWithContext} />
-         <Route exact path='/courses/create' component={CreateCourseWithContext} />
+         
          
       </Switch>
       </div>

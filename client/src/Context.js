@@ -41,7 +41,7 @@ export class Provider extends Component {
 
     //method used to retrieve a user from the API.
     getUser = async (emailAddress, password) => {
-        const response = await this.api(`/users`, 'GET', null, true, {emailAddress, password});
+        const response = await this.api('/users', 'GET', null, true, {emailAddress, password});
         if (response.status === 200) {
             //returns the user data
             return response.json()
@@ -124,6 +124,7 @@ export class Provider extends Component {
         const { emailAddress } = this.state.authenticatedUser;  
         const password = atob(this.state.userPassword);
         const response = await this.api('/courses', 'POST', courseData, true, {emailAddress, password});
+      //   console.log(response)
         if (response.status === 201) {
 
             //returns empty errors array if course successfully created
@@ -207,7 +208,7 @@ export class Provider extends Component {
                 getCourse: this.getCourse,
                 deleteCourse: this.deleteCourse,
                 getCourses: this.getCourses,
-               //  createUser: this.createUser
+                createUser: this.createUser
             }
         }
 

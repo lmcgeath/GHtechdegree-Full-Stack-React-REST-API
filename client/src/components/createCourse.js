@@ -12,6 +12,59 @@ export default class CreateCourse extends Component {
     materialsNeeded: '',
     errors: []
   }
+  
+  change = (event) => {
+   const name = event.target.name;
+   const value = event.target.value;
+
+   this.setState(() => {
+     return {
+       [name]: value
+     };
+   });
+}
+
+ submit = () => {
+   const {context} = this.props;
+   const {
+     title,
+     description,
+     estimatedTime,
+     materialsNeeded
+   } = this.state;
+   const {emailAddress} = context.authenticatedUser;
+   const password = context.userPassword;
+
+   const course = {
+     title,
+     description,
+     estimatedTime,
+     materialsNeeded
+   }
+
+   ///Call createCourse() method, stored in Context.
+   context.actions.createCourse(course, {emailAddress, password})
+     .then(response => {
+       //I check whether the response is an array, since this is how I have
+       //stored my errors.
+       if (Array.isArray(response)) {
+         //If there are errors, I set the errors property to the value of the
+         //second item in the response array.
+         this.setState({errors: response[1].error})
+       } else {
+         //If the call is successful, I redirect the client to the home page.
+         this.props.history.push('/');
+       }
+     }).catch(err =>{
+       //If there are any other errors, I log them to the console.
+       console.log(err);
+     });
+ }
+
+ cancel = () => {
+   //redirects the user to the home page. 
+   this.props.history.push('/');
+ }
 
   render() {
     const { context } = this.props;
@@ -22,7 +75,7 @@ export default class CreateCourse extends Component {
       materialsNeeded,
       errors,
     } = this.state;
-    const studentName = `${context.authenticatedUser.firstName} ${context.authenticatedUser.lastName}`
+    const ownerName = `${context.authenticatedUser.firstName} ${context.authenticatedUser.lastName}`
 
     return (
         <div className="bounds course--detail">
@@ -46,7 +99,7 @@ export default class CreateCourse extends Component {
                       value={title}
                       onChange={this.change}
                       placeholder="Course Title..." />
-                    <p>by {studentName}</p>
+                    <p>by {ownerName}</p>
                   </div>
                   <div className="course--description">
                     <textarea
@@ -94,56 +147,4 @@ export default class CreateCourse extends Component {
     )
   };
 
-    change = (event) => {
-      const name = event.target.name;
-      const value = event.target.value;
-
-      this.setState(() => {
-        return {
-          [name]: value
-        };
-      });
-  }
-
-    submit = () => {
-      const {context} = this.props;
-      const {
-        title,
-        description,
-        estimatedTime,
-        materialsNeeded
-      } = this.state;
-      const {emailAddress} = context.authenticatedUser;
-      const password = context.authenticatedUserPassword;
-
-      const course = {
-        title,
-        description,
-        estimatedTime,
-        materialsNeeded
-      }
-
-      ///Call createCourse() method, stored in Context.
-      context.actions.createCourse(course, {emailAddress, password})
-        .then(response => {
-          //I check whether the response is an array, since this is how I have
-          //stored my errors.
-          if (Array.isArray(response)) {
-            //If there are errors, I set the errors property to the value of the
-            //second item in the response array.
-            this.setState({errors: response[1].error})
-          } else {
-            //If the call is successful, I redirect the client to the home page.
-            this.props.history.push('/');
-          }
-        }).catch(err =>{
-          //If there are any other errors, I log them to the console.
-          console.log(err);
-        });
-    }
-
-    cancel = () => {
-      //redirects the user to the home page. 
-      this.props.history.push('/');
-    }
 }
