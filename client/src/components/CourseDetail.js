@@ -116,7 +116,7 @@ const ButtonsDisplay = (props) => {
         deleteCourse
     } = props
     let buttonsDisplay = null;
-   //  if (authenticatedUser) {
+    if (authenticatedUser) {
         if (authenticatedUser.id === courseOwner.id) {
             buttonsDisplay = (
                 <span>
@@ -124,7 +124,7 @@ const ButtonsDisplay = (props) => {
                     <button onClick={() => {deleteCourse(courseId)}} className="button">Delete Course</button>
                 </span>
             )
-      //   }
+        }
     }
     console.log(authenticatedUser)//need to get authenticated user to include id... ----NEED TO CHANGE------
 
