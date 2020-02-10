@@ -28,7 +28,8 @@ router.get('/users', authenticateUser, asyncHandler(async (req, res) => {
    res.json({
      firstName: user.firstName,
      lastName: user.lastName,
-     id: user.id
+     id: user.id,
+     emailAddress: user.emailAddress
    });
  }));
 

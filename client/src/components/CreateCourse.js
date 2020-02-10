@@ -10,6 +10,7 @@ export default class CreateCourse extends Component {
     description: '',
     estimatedTime: '',
     materialsNeeded: '',
+    userId: this.props.context.authenticatedUser.id,
     errors: []
   }
   
@@ -30,7 +31,8 @@ export default class CreateCourse extends Component {
      title,
      description,
      estimatedTime,
-     materialsNeeded
+     materialsNeeded,
+     userId
    } = this.state;
    const {emailAddress} = context.authenticatedUser;
    const password = context.userPassword;
@@ -39,12 +41,14 @@ export default class CreateCourse extends Component {
      title,
      description,
      estimatedTime,
-     materialsNeeded
+     materialsNeeded,
+     userId
    }
-
    ///Call createCourse() method, stored in Context.
    context.actions.createCourse(course, {emailAddress, password})
      .then(response => {
+      console.log(course)
+
        //I check whether the response is an array, since this is how I have
        //stored my errors.
        if (Array.isArray(response)) {

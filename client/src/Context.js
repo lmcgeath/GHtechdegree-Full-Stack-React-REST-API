@@ -99,7 +99,7 @@ export class Provider extends Component {
     signUp = async (userData) => {
         const response = await this.api('/users', 'POST', userData);
         if (response.status === 201) {
-           this.props.history.push('/');
+         window.location.href = '/';
             //returns empty errors array if user successfully created
             return [];
         } else if (response.status === 400) {
@@ -121,10 +121,11 @@ export class Provider extends Component {
 
     //method used to create a course, returns an errors array
     createCourse = async (courseData) => {
-        const { emailAddress } = this.state.authenticatedUser;  
+        const  emailAddress  = this.state.authenticatedUser.emailAddress;  
         const password = atob(this.state.userPassword);
         const response = await this.api('/courses', 'POST', courseData, true, {emailAddress, password});
-      //   console.log(response)
+        console.log(response)
+        console.log(emailAddress)
         if (response.status === 201) {
 
             //returns empty errors array if course successfully created
