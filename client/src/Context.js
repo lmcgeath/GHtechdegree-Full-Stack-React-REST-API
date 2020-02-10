@@ -61,6 +61,7 @@ export class Provider extends Component {
       }
       else if (response.status === 400) {
         return response.json().then(data => {
+           console.log(data.errors)
           return data.errors;
         });
       }
@@ -124,8 +125,6 @@ export class Provider extends Component {
         const  emailAddress  = this.state.authenticatedUser.emailAddress;  
         const password = atob(this.state.userPassword);
         const response = await this.api('/courses', 'POST', courseData, true, {emailAddress, password});
-        console.log(response)
-        console.log(emailAddress)
         if (response.status === 201) {
 
             //returns empty errors array if course successfully created
