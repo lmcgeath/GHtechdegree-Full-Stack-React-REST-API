@@ -32,10 +32,9 @@ export default (props) => {
     </div>
   );
 }
-
+//conditionally renders errors
 function ErrorsDisplay( {errors} ) {
   let errorsDisplay = null;
-//   const errorMessages = errors.map(error => error.message);
   if (errors.length) {
    errorsDisplay = (
      <div>

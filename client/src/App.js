@@ -37,9 +37,7 @@ const App = () => (
       <Switch>
          <Route exact path='/' component={CoursesWithContext}/>
          <Route exact path='/courses' component={CoursesWithContext} />
-         
          <PrivateRoute exact path='/courses/create' component={CreateCourseWithContext} />
-         
          <Route exact path='/signin' component={UserSignInWithContext} />
          <Route exact path='/signup' component={UserSignUpWithContext} />
          <Route exact path='/signout' component={UserSignOutWithContext} />
@@ -48,11 +46,7 @@ const App = () => (
          <Route path="/error" component={UnhandledError} />
          <Route path="/forbidden" component={Forbidden} />
          <Route path="/notfound" component={NotFound} />
-         <Route component={NotFound} />
-
-
-         
-         
+         <Route component={NotFound} />           
       </Switch>
       </div>
    </Router>

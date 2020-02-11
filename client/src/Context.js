@@ -7,7 +7,6 @@ import Cookies from 'js-cookie';
 //sets up a context and returns an object with Provider and Consumer properties that are also objects.
 const Context = React.createContext();
 
-//A higher-order component (HOC) that shares functionality across the components of the app. Returns a Provider component which provides the application state and any actions or event handlers that need to be shared between components, via a required value prop.
 export class Provider extends Component {
     //stores the current user name, email and password
     state = {
@@ -180,7 +179,6 @@ export class Provider extends Component {
             //returns errors array if any validation errors
             return response.json()
                 .then(responseData => {
-                  //   const errors = [ responseData.errors || responseData.message ];
                     return responseData.errors;
                 })
         } else if (response.status === 404){

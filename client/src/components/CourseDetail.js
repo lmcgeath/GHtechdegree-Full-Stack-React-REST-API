@@ -15,7 +15,6 @@ export default class CourseDetail extends Component {
         const courseId = this.props.match.params.id;
         this.props.context.actions.getCourse(courseId)
             .then(responseData => {
-               console.log(responseData)
                 if (responseData !== null) {
                     //sets course state if course found
                     this.setState({ 

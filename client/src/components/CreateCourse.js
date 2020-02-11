@@ -44,7 +44,7 @@ export default class CreateCourse extends Component {
      materialsNeeded,
      userId
    }
-   ///Call createCourse() method, stored in Context.
+   //Calls createCourse() method, stored in Context.
    context.actions.createCourse(course, {emailAddress, password})
    .then( errors => {
       if (errors.length) {

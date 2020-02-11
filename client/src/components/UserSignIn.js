@@ -70,11 +70,10 @@ export default class UserSignIn extends Component {
     const { context } = this.props;
     const { emailAddress, password } = this.state;
 
-    ///calls signIn() method, stored in Context.
+    //calls signIn() method, stored in Context.
     context.actions.signIn(emailAddress, password)
       .then((user) => {
-        //If no user is returned, then I set errors in state to an array with one
-        //item: the string 'Sign-in was unsuccessful'.
+        //If no user is returned, state gets set to an array with the errors
         if (user === null) {
           this.setState(() => {
             return { errors: [ 'Sign-in was unsuccessful' ] };
