@@ -3,7 +3,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Form from './Form';
-// import ErrorsDisplay from './Form';
 
 
 export default class UserSignUp extends Component {
@@ -85,7 +84,6 @@ export default class UserSignUp extends Component {
   }
 
   submit = () => {
-   // const { context } = this.props;
    const {
      firstName,
      lastName,
@@ -103,6 +101,7 @@ export default class UserSignUp extends Component {
     .then( errors => {
       if (errors.length) {
          this.setState({ errors });
+         
        } else {
          console.log(`${emailAddress} is successfully signed up and authenticated!`);
        }

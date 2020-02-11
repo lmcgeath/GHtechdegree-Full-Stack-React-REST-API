@@ -60,8 +60,8 @@ export class Provider extends Component {
         return [];
       }
       else if (response.status === 400) {
-        return response.json().then(data => {
-           console.log(data.errors)
+        console.log (response.json()).then(data => {
+         //   console.log(data.errors)
           return data.errors;
         });
       }
@@ -133,8 +133,8 @@ export class Provider extends Component {
         } else if (response.status === 400) {
             //returns errors array if validation fails
             return response.json()
-                    .then(responseData => {
-                        return responseData.errors;
+               .then(responseData => {
+                  return responseData.errors
                     })
         } else {
             throw new Error();
@@ -180,10 +180,17 @@ export class Provider extends Component {
             //returns errors array if any validation errors
             return response.json()
                 .then(responseData => {
-                    const errors = [ responseData.errors || responseData.message ];
-                    return errors;
+                  //   const errors = [ responseData.errors || responseData.message ];
+                    return responseData.errors;
                 })
-        } else {
+        } else if (response.status === 404){
+           return response.json()
+            .then(responseData => {
+               return responseData.message
+            })
+        }
+        
+        else {
             throw new Error();
         }
     }

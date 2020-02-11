@@ -46,24 +46,21 @@ export default class CreateCourse extends Component {
    }
    ///Call createCourse() method, stored in Context.
    context.actions.createCourse(course, {emailAddress, password})
-     .then(response => {
-      console.log(course)
+   .then( errors => {
+      if (errors.length) {
+          //if there are errors, sets the errors state
+          this.setState({ errors });
+      } else {
+          //if there aren't any errors, redirects to the course list
+          this.props.history.push('/courses');
+      }
+  })
+  .catch( error => {
+      console.log(error);
+      this.props.history.push('/error');
+  })
 
-       //I check whether the response is an array, since this is how I have
-       //stored my errors.
-       if (Array.isArray(response)) {
-         //If there are errors, I set the errors property to the value of the
-         //second item in the response array.
-         this.setState({errors: response[1].error})
-       } else {
-         //If the call is successful, I redirect the client to the home page.
-         this.props.history.push('/');
-       }
-     }).catch(err =>{
-       //If there are any other errors, I log them to the console.
-       console.log(err);
-     });
- }
+}
 
  cancel = () => {
    //redirects the user to the home page. 

@@ -53,7 +53,8 @@ router.post('/users', (async (req, res) => {
      .status(201).end();
    } catch (error) {
      if(error.name === "SequelizeValidationError" || "SequelizeUniqueConstraintError") { // checking the error
-      res.status(400).json({ errors: error.message})
+      const errorMessages = error.errors.map(error => error.message);
+      res.status(400).json({ errors: errorMessages });
       } else {
         return error; // error caught in the asyncHandler's catch block
        }  

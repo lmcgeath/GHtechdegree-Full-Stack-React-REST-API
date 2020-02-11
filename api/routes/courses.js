@@ -47,9 +47,12 @@ router.get('/courses/:id', asyncHandler(async (req, res) => {
          attributes: ['id', 'firstName', 'lastName'] 
        }]
    });
-   res.json({course})
-   .status(200).end();
-}))
+    if (course) {
+    res.status(200).json({course});
+  } else {
+    res.sendStatus(404);
+  }
+}));
 
 // Creates a course, sets the Location header to the URI for the course, and returns no content
 router.post('/courses', authenticateUser, asyncHandler(async (req, res, next) => {
@@ -61,7 +64,9 @@ router.post('/courses', authenticateUser, asyncHandler(async (req, res, next) =>
    } catch (error) {
      if(error.name === "SequelizeValidationError") { // checking the error
       //  course = await Course.build(req.body);
-      res.status(400).json({ errors: error.message})
+      // res.status(400).json({ error: {error}})
+      const errorMessages = error.errors.map(error => error.message);
+      res.status(400).json({ errors: errorMessages });
       } else {
          throw error; // error caught in the asyncHandler's catch block
        }  

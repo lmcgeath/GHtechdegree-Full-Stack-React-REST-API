@@ -152,24 +152,23 @@ export default class UpdateCourse extends Component {
       materialsNeeded
     }
 
-    ///I call my updateCourse() method, stored in my Context.
+    ///Calls updateCourse() method, stored in Context.
     context.actions.updateCourse(id, courseData,  {emailAddress, password})
-      .then(response => {
-        //I check whether the response is an array, since this is how I have
-        //stored my errors.
-        if (Array.isArray(response)) {
-          //If there are errors, I set the errors property to the value of the
-          //second item in the response array.
-          this.setState({errors: response[1].error})
-        } else {
-          //If the call is successful, I redirect the client to the course's page.
+    .then( errors => {
+      if (errors.length) {
+          //if there are errors, set the errors state
+          this.setState({ errors });
+      }
+       else {
+          //if there aren't any errors, redirect to the course detail page
           this.props.history.push(`/courses/${id}`);
-        }
-      }).catch(err =>{
-        //If there are any other errors, I log them to the console.
-        console.log(err);
-      });
-  }
+      }
+  })
+  .catch( err => {
+      console.log(err);
+      this.props.history.push('/error');
+  })   
+}
 
   cancel = () => {
       //In my cancel method, I simply redirect the user to the course page. 
