@@ -63,8 +63,6 @@ router.post('/courses', authenticateUser, asyncHandler(async (req, res, next) =>
      .status(201).end();
    } catch (error) {
      if(error.name === "SequelizeValidationError") { // checking the error
-      //  course = await Course.build(req.body);
-      // res.status(400).json({ error: {error}})
       const errorMessages = error.errors.map(error => error.message);
       res.status(400).json({ errors: errorMessages });
       } else {
@@ -86,10 +84,15 @@ router.put('/courses/:id', authenticateUser,
    try {
       course = await Course.findByPk(req.params.id);
       if (course){
-         await course.update(req.body);
+         //checks whether title and description are filled in and prevents an update if not
+         if(req.body.title && req.body.description){
+            await course.update(req.body)
+            res.location(`/courses/${course.id}`)
+            .status(204).end();
+      }
          // Attempt to get the validation result from the Request object.
       const errors = validationResult(req);
-
+         
       // If there are validation errors...
   if (!errors.isEmpty()) {
     // Use the Array `map()` method to get a list of error messages.
@@ -105,6 +108,7 @@ router.put('/courses/:id', authenticateUser,
       } 
    }
    catch (error) {
+      
      }
 }))
 
