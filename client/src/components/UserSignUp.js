@@ -11,6 +11,7 @@ export default class UserSignUp extends Component {
     lastName: '',
     emailAddress: '',
     password: '',
+    confirmPassword: '',
     errors: [],
   }
 
@@ -21,6 +22,7 @@ export default class UserSignUp extends Component {
       emailAddress,
       password,
       errors,
+      confirmPassword
     } = this.state;
 
     return (
@@ -62,6 +64,13 @@ export default class UserSignUp extends Component {
                   value={password} 
                   onChange={this.change} 
                   placeholder="Password" />
+                  <input 
+                  id="confirmPassword" 
+                  name="confirmPassword"
+                  type="password"
+                  value={confirmPassword} 
+                  onChange={this.change} 
+                  placeholder="Confirm Password" />
               </React.Fragment>
             )} />
           <p>
@@ -75,7 +84,6 @@ export default class UserSignUp extends Component {
   change = (event) => {
     const name = event.target.name;
     const value = event.target.value;
-
     this.setState(() => {
       return {
         [name]: value
@@ -89,7 +97,9 @@ export default class UserSignUp extends Component {
      lastName,
      emailAddress,
      password,
+     confirmPassword
    } = this.state; 
+
     // New user payload
     const user = {
       firstName,
@@ -97,20 +107,27 @@ export default class UserSignUp extends Component {
       emailAddress,
       password
     };
+   if (password === confirmPassword){
     this.props.context.actions.signUp(user)
     .then( errors => {
       if (errors.length) {
          this.setState({ errors });
          
        } else {
+          this.props.context.actions.signIn(emailAddress, password)
          console.log(`${emailAddress} is successfully signed up and authenticated!`);
        }
      })
+   
      .catch( err => { // handle rejected promises
       console.log(err);
       this.props.history.push('/error'); // push to history stack
     }); 
+    
+   }else {
+      console.log('Passwords must match')
    }
+}
 
   cancel = () => {
    this.props.history.push('/');

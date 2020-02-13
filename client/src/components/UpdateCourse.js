@@ -22,7 +22,7 @@ export default class UpdateCourse extends Component {
           description,
           estimatedTime,
           materialsNeeded
-        } = course;
+        } = course.course;
     
         const ownerName = `${context.authenticatedUser.firstName} ${context.authenticatedUser.lastName}`
 
