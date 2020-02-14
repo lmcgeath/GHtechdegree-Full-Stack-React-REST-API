@@ -151,15 +151,18 @@ export default class UpdateCourse extends Component {
       estimatedTime,
       materialsNeeded
     }
-
     ///Calls updateCourse() method, stored in Context.
     context.actions.updateCourse(id, courseData,  {emailAddress, password})
     .then( errors => {
+      console.log(id)
+
       if (errors.length) {
+         console.log('errors exist')
           //if there are errors, set the errors state
           this.setState({ errors });
       }
        else {
+          console.log('no errors')
           //if there aren't any errors, redirect to the course detail page
           this.props.history.push(`/courses/${id}`);
       }

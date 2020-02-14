@@ -176,6 +176,7 @@ export class Provider extends Component {
             //returns an empty errors array if course successfully updated
             return [];
         } else if (response.status === 400) {
+           console.log(response.status)
             //returns errors array if any validation errors
             return response.json()
                 .then(responseData => {

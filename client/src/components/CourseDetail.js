@@ -25,7 +25,7 @@ export default class CourseDetail extends Component {
 
                 } else {
                     //redirects user if course not found
-                    this.props.history.push('/notfound');
+                  //   this.props.history.push('/notfound');
                 }
             })
                   .catch(error => {
@@ -44,7 +44,7 @@ export default class CourseDetail extends Component {
                     this.props.history.push('/courses');
                 } else if (response.status === 404) {
                     //redirects to notFound if course doesn't exist
-                    this.props.history.push('/notfound');
+                  //   this.props.history.push('/notfound');
                 } else if (response.status === 403) {
                     //redirects to forbidden if current user doesn't own the course
                     this.props.history.push('/forbidden');
@@ -71,7 +71,7 @@ export default class CourseDetail extends Component {
                                        courseOwner={courseOwner}
                                        courseId={this.props.match.params.id}
                                        deleteCourse={this.deleteCourse} />
-                            <Link to="/courses" className="button button-secondary">Return to List</Link>
+                            
                         </div>
                     </div>
                 </div>
@@ -121,14 +121,15 @@ const ButtonsDisplay = (props) => {
                 <span>
                     <Link to={`/courses/${courseId}/update`} className="button">Update Course</Link>
                     <button onClick={() => {deleteCourse(courseId)}} className="button">Delete Course</button>
+                    <Link to="/courses" className="button button-secondary">Return to List</Link>
                 </span>
             )
         } else {
-           buttonsDisplay = <div></div>
-        }
-    }
-else {
-   window.location.href = '/signin'
-}
+         buttonsDisplay = <span><Link to="/courses" className="button button-secondary">Return to List</Link></span>
+      }
+    } else {
+      buttonsDisplay = <span></span>
+   }
+
     return buttonsDisplay;   
 }
