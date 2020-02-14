@@ -74,10 +74,10 @@ router.post('/courses', authenticateUser, asyncHandler(async (req, res, next) =>
 // Updates a course and validates request
 router.put('/courses/:id', authenticateUser,  
    check('title')
-     .exists()
+     .exists().not().isEmpty()
      .withMessage('Please provide a value for "title"'),
    check('description')
-     .exists()
+     .exists().not().isEmpty()
      .withMessage('Please provide a value for "description"'),
   (async (req, res) => {
    let course;

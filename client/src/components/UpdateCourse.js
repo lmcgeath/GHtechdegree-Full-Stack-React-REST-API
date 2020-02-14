@@ -154,16 +154,12 @@ export default class UpdateCourse extends Component {
     ///Calls updateCourse() method, stored in Context.
     context.actions.updateCourse(id, courseData,  {emailAddress, password})
     .then( errors => {
-      console.log(id)
-
       if (errors.length) {
-         console.log('errors exist')
-          //if there are errors, set the errors state
+          //if there are errors, sets the errors state
           this.setState({ errors });
       }
        else {
-          console.log('no errors')
-          //if there aren't any errors, redirect to the course detail page
+          //if there aren't any errors, redirects to the course detail page
           this.props.history.push(`/courses/${id}`);
       }
   })
@@ -174,7 +170,7 @@ export default class UpdateCourse extends Component {
 }
 
   cancel = () => {
-      //In my cancel method, I simply redirect the user to the course page. 
+      //redirects the user to the course page. 
     const {id} = this.state.course.course;
     this.props.history.push(`/courses/${id}`);
   }
