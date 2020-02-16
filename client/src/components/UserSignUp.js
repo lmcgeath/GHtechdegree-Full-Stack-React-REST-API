@@ -123,9 +123,11 @@ export default class UserSignUp extends Component {
       console.log(err);
       this.props.history.push('/error'); // push to history stack
     }); 
-    
+    //Creates a string indicating the passwords do not match and pushes it to the errors array
    }else {
-      console.log('Passwords must match')
+      const passMatchError = this.state.errors.push('Passwords must match')
+      //Sets the error state to include a message that the passwords do not match
+      this.setState({ passMatchError });
    }
 }
 

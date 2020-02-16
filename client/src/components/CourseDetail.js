@@ -128,7 +128,7 @@ const ButtonsDisplay = (props) => {
          buttonsDisplay = <span><Link to="/courses" className="button button-secondary">Return to List</Link></span>
       }
     } else {
-      buttonsDisplay = <span></span>
+      buttonsDisplay = <span><Link to="/courses" className="button button-secondary">Return to List</Link></span>
    }
 
     return buttonsDisplay;   
