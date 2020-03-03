@@ -76,3 +76,7 @@ sequelize.sync().then()
 const server = app.listen(app.get('port'), () => {
   console.log(`Express server is listening on port ${server.address().port}`);
 });
+// Express only serves static assets in production
+if (process.env.NODE_ENV === "production") {
+   app.use(express.static("client/build"));
+ }
