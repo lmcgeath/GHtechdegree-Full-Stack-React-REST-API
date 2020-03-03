@@ -8,8 +8,8 @@
      "storage": "fsjstd-restapi.db"
    },
    "production": {
-      "use_env_variable": "DATABASE_URL"
-    }
-  
+     "dialect": "sqlite",
+     "storage": "fsjstd-restapi.db"
+   }
  }
  
